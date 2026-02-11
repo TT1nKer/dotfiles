@@ -10,4 +10,9 @@ fi
 pkill waybar >/dev/null 2>&1 || true
 nohup waybar >/dev/null 2>&1 &
 
-echo "Applied: hypr reload + waybar restart"
+# Reload zsh config (if current shell is zsh)
+if [ -n "${ZSH_VERSION-}" ]; then
+  source "${HOME}/.zshrc" >/dev/null 2>&1 || true
+fi
+
+echo "Applied: hypr reload + waybar restart + zsh reload(if zsh)"
