@@ -7,19 +7,21 @@ BK="${HOME}/.dotfiles_backup/$(date +%Y%m%d-%H%M%S)"
 
 mkdir -p "${CFG}" "${BK}"
 
+log() { printf '%s\n' "$*"; }
+
 # ---------- helpers ----------
 backup_target() {
   local target="$1"
 
-  # symlink: remove it (no backup needed)
+  # if it's a symlink (even dangling), remove it; no backup needed
   if [ -L "$target" ]; then
     rm -f "$target"
     return 0
   fi
 
-  # real file/dir: move to backup
+  # if it's a real file/dir, move it to backup
   if [ -e "$target" ]; then
-    local rel="${target#$HOME/}"   # relative path under $HOME
+    local rel="${target#$HOME/}"   # path relative to $HOME
     mkdir -p "${BK}/$(dirname "$rel")"
     mv "$target" "${BK}/${rel}"
   fi
@@ -29,36 +31,58 @@ link_path() {
   local src="$1"
   local dst="$2"
 
+  # src must exist (real file/dir); otherwise skip to avoid dangling links
   if [ ! -e "$src" ]; then
-    echo "Skip (missing): $src"
+    log "Skip (missing): $src"
     return 0
   fi
 
   mkdir -p "$(dirname "$dst")"
   backup_target "$dst"
+
   ln -s "$src" "$dst"
-  echo "Linked: $dst -> $src"
+  log "Linked: $dst -> $src"
+}
+
+# Map format: "DST:SR C"
+# If DST starts with ".config/", it will be under ~/.config/
+# Otherwise it's relative to $HOME (e.g. ".zshrc")
+apply_map() {
+  local entry="$1"
+  local dst_rel="${entry%%:*}"
+  local src_rel="${entry#*:}"
+
+  local dst
+  if [[ "$dst_rel" == .config/* ]]; then
+    dst="${HOME}/${dst_rel}"      # already includes .config/...
+  else
+    dst="${HOME}/${dst_rel}"
+  fi
+
+  link_path "${DOT}/${src_rel}" "${dst}"
 }
 
 # ---------- what to link ----------
-# A) .config dirs: ~/.config/<name> -> ~/.dotfiles/<name>
-CONFIG_DIRS=(hypr waybar kitty rofi starship.toml)
+# Put EVERYTHING here, easy to extend later.
+# Left side: destination relative to $HOME
+# Right side: source relative to $DOT
+LINK_MAP=(
+  # --- config dirs ---
+  ".config/hypr:hypr"
+  ".config/waybar:waybar"
+  ".config/kitty:kitty"
+  ".config/rofi:rofi"
 
-# B) home files: ~/.<name> -> ~/.dotfiles/<group>/<file>
-# format: "DEST_REL:SOURCE_REL"
-HOME_LINKS=(
+  # --- single config files ---
+  ".config/starship.toml:starship/starship.toml"
+
+  # --- home dotfiles ---
   ".zshrc:zsh/zshrc"
 )
 
 # ---------- run ----------
-for d in "${CONFIG_DIRS[@]}"; do
-  link_path "${DOT}/${d}" "${CFG}/${d}"
+for entry in "${LINK_MAP[@]}"; do
+  apply_map "$entry"
 done
 
-for item in "${HOME_LINKS[@]}"; do
-  dst_rel="${item%%:*}"
-  src_rel="${item#*:}"
-  link_path "${DOT}/${src_rel}" "${HOME}/${dst_rel}"
-done
-
-echo "Done. Backup (if any): ${BK}"
+log "Done. Backup (if any): ${BK}"
