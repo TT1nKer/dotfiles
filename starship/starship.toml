@@ -1,16 +1,6 @@
 add_newline = false
 
-format = """
-$username\
-$directory\
-$git_branch\
-$git_status\
-$cmd_duration\
-$character"""
-
-[username]
-style_user = "bold green"
-show_always = false
+format = "$directory $git_branch$git_status$cmd_duration$character"
 
 [directory]
 style = "bold blue"
@@ -20,15 +10,24 @@ truncate_to_repo = true
 [git_branch]
 symbol = " "
 style = "bold purple"
+format = "[$symbol$branch]($style) "
 
 [git_status]
-format = "([$all_status$ahead_behind]($style)) "
 style = "red"
+format = "([✗$modified$staged$untracked$ahead_behind]($style)) "
+modified = ""
+staged = ""
+untracked = ""
+ahead = "↑"
+behind = "↓"
+diverged = "↕"
+up_to_date = ""
+conflicted = "!"
 
 [cmd_duration]
 min_time = 800
-format = "[$duration]($style) "
 style = "yellow"
+format = "[$duration]($style) "
 
 [character]
 success_symbol = "[❯](bold green)"
