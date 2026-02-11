@@ -1,0 +1,33 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "spacing": 6,
+
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["cpu", "memory", "network", "battery", "tray"],
+
+  "clock": {
+    "format": "  {:%H:%M}    {:%a %b %d}"
+  },
+
+  "cpu": {
+    "format": " {usage}%"
+  },
+
+  "memory": {
+    "format": " {percentage}%"
+  },
+
+  "network": {
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "󰈀 wired",
+    "format-disconnected": " offline"
+  },
+
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-icons": ["","","","",""]
+  }
+}

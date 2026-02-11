@@ -1,0 +1,26 @@
+configuration {
+  modi: "drun";
+  show-icons: true;
+  font: "JetBrainsMono Nerd Font 12";
+}
+
+* {
+  background: rgba(10, 10, 18, 0.85);
+  foreground: rgba(0, 245, 255, 0.95);
+  border-color: rgba(255, 0, 255, 0.90);
+}
+
+window {
+  width: 40%;
+  border: 2px;
+  border-radius: 12px;
+}
+
+listview {
+  lines: 10;
+  spacing: 6px;
+}
+
+element selected {
+  background-color: rgba(255, 0, 255, 0.20);
+}
