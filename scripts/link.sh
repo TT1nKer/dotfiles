@@ -42,13 +42,12 @@ link_path() {
 
 # ---------- what to link ----------
 # A) .config dirs: ~/.config/<name> -> ~/.dotfiles/<name>
-CONFIG_DIRS=(hypr waybar kitty rofi)
+CONFIG_DIRS=(hypr waybar kitty rofi starship.toml)
 
 # B) home files: ~/.<name> -> ~/.dotfiles/<group>/<file>
 # format: "DEST_REL:SOURCE_REL"
 HOME_LINKS=(
   ".zshrc:zsh/zshrc"
-  "starship.toml:starship/starship.toml"
 )
 
 # ---------- run ----------
