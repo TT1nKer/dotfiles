@@ -40,3 +40,10 @@ alias update='sudo pacman -Syu'
 # Starship prompt
 # -------------------------
 eval "$(starship init zsh)"
+
+acpp() {
+  git add .
+  git commit -m "$1"
+  git push
+}
+
