@@ -78,6 +78,9 @@ LINK_MAP=(
 
   # --- home dotfiles ---
   ".zshrc:zsh/zshrc"
+
+  #niri
+  ".config/niri:niri"
 )
 
 # ---------- run ----------
