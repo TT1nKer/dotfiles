@@ -1,0 +1,31 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+}
+
+layout {
+    gaps 8
+    focus-ring {
+        width 2
+    }
+}
+
+spawn-at-startup "waybar"
+spawn-at-startup "foot"
+
+binds {
+    Mod+Return { spawn "foot"; }
+    Mod+D { spawn "fuzzel"; }
+    Mod+Q { close-window; }
+
+    Mod+H { focus-column-left; }
+    Mod+L { focus-column-right; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+}
