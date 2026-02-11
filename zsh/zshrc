@@ -49,3 +49,7 @@ acpp() {
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
+alias ls="eza --icons"
+alias ll="eza -lah --icons"
+alias cat="bat"
