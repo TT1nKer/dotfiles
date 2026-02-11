@@ -1,0 +1,42 @@
+# -------------------------
+# 基础环境
+# -------------------------
+export EDITOR=vim
+export TERM=xterm-256color
+
+# -------------------------
+# 历史记录优化
+# -------------------------
+HISTSIZE=5000
+SAVEHIST=5000
+HISTFILE=~/.zsh_history
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_dups
+setopt hist_reduce_blanks
+
+# -------------------------
+# 自动补全
+# -------------------------
+autoload -Uz compinit
+compinit
+
+# -------------------------
+# 插件（必须放 compinit 后面）
+# -------------------------
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# -------------------------
+# 常用 alias
+# -------------------------
+alias ll='ls -lah'
+alias la='ls -A'
+alias gs='git status'
+alias gl='git log --oneline --graph --all'
+alias update='sudo pacman -Syu'
+
+# -------------------------
+# Starship prompt
+# -------------------------
+eval "$(starship init zsh)"
