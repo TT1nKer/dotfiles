@@ -1,3 +1,21 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+}
+
+layout {
+    gaps 8
+    focus-ring {
+        width 2
+    }
+}
+
+spawn-at-startup "waybar"
+spawn-at-startup "foot"
+
 binds {
     Mod+Return { spawn "foot"; }
     Mod+D { spawn "fuzzel"; }
