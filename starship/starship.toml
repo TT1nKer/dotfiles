@@ -1,0 +1,4 @@
+[directory]
+style = "bold bright-blue"
+truncation_length = 10
+truncate_to_repo = false
