@@ -16,3 +16,5 @@ if [ -n "${ZSH_VERSION-}" ]; then
 fi
 
 echo "Applied: hypr reload + waybar restart + zsh reload(if zsh)"
+
+#for starship, it will be applied in next new shell, no need to reload explicitly
