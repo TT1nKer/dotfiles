@@ -48,6 +48,7 @@ CONFIG_DIRS=(hypr waybar kitty rofi)
 # format: "DEST_REL:SOURCE_REL"
 HOME_LINKS=(
   ".zshrc:zsh/zshrc"
+  "starship.toml:starship/starship.toml"
 )
 
 # ---------- run ----------

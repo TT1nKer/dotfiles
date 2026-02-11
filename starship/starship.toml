@@ -1,4 +1,35 @@
+add_newline = false
+
+format = """
+$username\
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$character"""
+
+[username]
+style_user = "bold green"
+show_always = false
+
 [directory]
-style = "bold bright-blue"
-truncation_length = 10
-truncate_to_repo = false
+style = "bold blue"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = "([$all_status$ahead_behind]($style)) "
+style = "red"
+
+[cmd_duration]
+min_time = 800
+format = "[$duration]($style) "
+style = "yellow"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
